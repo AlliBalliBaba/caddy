@@ -337,6 +337,7 @@ func parsePHPFastCGI(h httpcaddyfile.Helper) ([]httpcaddyfile.ConfigValue, error
 			redirMatcherSet := caddy.ModuleMap{
 				"file": h.JSON(fileserver.MatchFile{
 					TryFiles: []string{dirIndex},
+					Root: fcgiTransport.Root,
 				}),
 				"not": h.JSON(caddyhttp.MatchNot{
 					MatcherSetsRaw: []caddy.ModuleMap{
@@ -364,6 +365,7 @@ func parsePHPFastCGI(h httpcaddyfile.Helper) ([]httpcaddyfile.ConfigValue, error
 				TryFiles:  tryFiles,
 				TryPolicy: tryPolicy,
 				SplitPath: extensions,
+				Root: fcgiTransport.Root,
 			}),
 		}
 		rewriteHandler := rewrite.Rewrite{
